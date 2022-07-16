@@ -1,8 +1,9 @@
+import { AppRouter } from "./routers/AppRouter"
 
 export const DevRepository = () => {
-  return (
-    <div>
-        <h1>Hello</h1>
-    </div>
-  )
+    return (
+        <div>
+            <AppRouter />
+        </div>
+    )
 }
