@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import {
     BrowserRouter as Router,
     Switch
@@ -9,8 +10,7 @@ import { PublicRoute } from "./PublicRoute";
 
 export const AppRouter = () => {
 
-    // const { authenticated } = useSelector(state => state.auth);
-    const isAuthenticated = false;
+    const { isAuthenticated } = useSelector(state => state.auth);
 
     return (
         <Router>
@@ -20,7 +20,7 @@ export const AppRouter = () => {
                         path={"/login"}
                         component={LoginScreen}
                         isAuthenticated={isAuthenticated}
-                    /> 
+                    />
                     <PrivateRoute
                         path={"/"}
                         component={ProfileScreen}
