@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 import { FormLogin } from "./FormLogin"
 
 export const LoginScreen = () => {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const [formLoginValue, handleLoginInputChange] = useForm({
         email: 'felipe@gmail.com',
         password: '123456'
@@ -17,7 +18,7 @@ export const LoginScreen = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        // dispatch(login(formLoginValue.lEmail, formLoginValue.lPassword))
+        dispatch(login(formLoginValue.email, formLoginValue.password))
     }
 
     const handleSigin = (e) => {
@@ -27,9 +28,9 @@ export const LoginScreen = () => {
 
     return (
         <div className="container">
-            <div class="row mt-5">
+            <div className="row mt-5">
                 
-                <div class="col">
+                <div className="col">
                     <FormLogin
                         title={"Login"}
                         formValues={formLoginValue}
@@ -40,7 +41,7 @@ export const LoginScreen = () => {
                     />
                 </div>
                 
-                <div class="col">
+                <div className="col">
                     <FormLogin
                         title={"Sigin"}
                         formValues={formSiginValue}

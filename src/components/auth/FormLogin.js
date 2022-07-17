@@ -14,22 +14,22 @@ export const FormLogin = ({ title, formValues, handleChange, handleSubmit, textB
                 <h2>{title}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                        <label htmlFor={`exampleInputEmail1${isLogin ? "login" : "sigin"}`} className="form-label">Email address</label>
                         <input
                             type="email"
                             className="form-control"
-                            id="exampleInputEmail1"
+                            id={`"exampleInputEmail1${isLogin ? "login" : "sigin"}"`}
                             name="email"
                             value={formValues.email}
                             onChange={handleChange}
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                        <label htmlFor={`exampleInputPassword1${isLogin ? "login" : "sigin"}`} className="form-label">Password</label>
                         <input
                             type="password"
                             className="form-control"
-                            id="exampleInputPassword1"
+                            id={`exampleInputPassword1${isLogin ? "login" : "sigin"}`}
                             name="password"
                             value={formValues.password}
                             onChange={handleChange}
