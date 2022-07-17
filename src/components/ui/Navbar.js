@@ -15,7 +15,7 @@ export const Navbar = () => {
 
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-
+            
             <Link
                 className="navbar-brand"
                 to="/"
@@ -28,16 +28,16 @@ export const Navbar = () => {
 
                     <NavLink
                         className={({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '')}
-                        to="/home"
+                        to="/"
                     >
                         Home
                     </NavLink>
 
                     <NavLink
                         className={({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '')}
-                        to="/profile"
+                        to="/repositories"
                     >
-                        Profile
+                        Repositories
                     </NavLink>
                 </div>
             </div>

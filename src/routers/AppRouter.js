@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import { LoginScreen } from "../components/auth/LoginScreen";
 import { ProfileScreen } from "../components/profile/ProfileScreen";
+import { RepositoriesScreen } from "../components/profile/repositories/RepositoriesScreen";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 
@@ -22,8 +23,13 @@ export const AppRouter = () => {
                         isAuthenticated={isAuthenticated}
                     />
                     <PrivateRoute
-                        path={"/"}
+                        exact path={"/"}
                         component={ProfileScreen}
+                        isAuthenticated={isAuthenticated}
+                    />
+                    <PrivateRoute
+                        path={"/repositories"}
+                        component={RepositoriesScreen}
                         isAuthenticated={isAuthenticated}
                     />
                 </Switch>

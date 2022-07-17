@@ -6,6 +6,7 @@ import { AppRouter } from "./routers/AppRouter"
 import { store } from "./store/store"
 
 export const DevRepository = () => {
+    
     return (
         <Provider store={store}>
             <ApolloProvider client={client}>
