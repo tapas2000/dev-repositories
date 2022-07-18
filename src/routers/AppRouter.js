@@ -12,7 +12,7 @@ import { PublicRoute } from "./PublicRoute";
 export const AppRouter = () => {
 
     const { isAuthenticated } = useSelector(state => state.auth);
-
+    
     return (
         <Router>
             <div>

@@ -15,7 +15,7 @@ export const login = (user) => {
         if (resp.status === 200) {
             const { name, nickname, email } = body.searchedUser;
             localStorage.setItem('token', body.token);
-            localStorage.setItem('user', body.searchedUser);
+            localStorage.setItem('user', JSON.stringify(body.searchedUser));
             Swal.fire('Success', body.msg);
             dispatch(loginObject(name, nickname, email));
         } else {
@@ -26,7 +26,7 @@ export const login = (user) => {
 
 export const register = (newUSer) => {
 
-    return async (dispatch) => {
+    return async () => {
         Swal.showLoading();
         const resp = await fetchWithoutToken(END_POINT_AUTH_SIGIN, newUSer, 'POST');
         const body = await resp.json();
@@ -41,6 +41,17 @@ export const register = (newUSer) => {
     }
 }
 
+export const startChecking = () => {
+    return (dispatch) => {
+        const user = localStorage.getItem('user') || null;
+
+        if (user) {
+            const { name, nickname, email } = JSON.parse(user);
+            dispatch(loginObject(name, nickname, email));
+        }
+    }
+}
+
 const loginObject = (name, nickname, email) => ({
     type: types.authLogIn, payload: {
         name,
@@ -50,4 +61,7 @@ const loginObject = (name, nickname, email) => ({
 })
 
 
-export const logout = () => ({ type: types.authLogOut })
+export const logout = () => {
+    localStorage.clear();
+    return { type: types.authLogOut }
+}

@@ -11,7 +11,7 @@ export const RepositoriesTable = ({ addFavorite, optionSelected, repositories })
                     <th scope="col">Type</th>
                     <th scope="col">Url</th>
                     {
-                        optionSelected
+                        optionSelected === "1"
                         &&
                         <th scope="col">Favorite</th>
                     }
@@ -28,7 +28,7 @@ export const RepositoriesTable = ({ addFavorite, optionSelected, repositories })
                                 <td>{repository.isPrivate ? "Private" : "Public"}</td>
                                 <td><a href={repository.url} className="nav-link">Link</a></td>
                                 {
-                                    optionSelected
+                                    optionSelected === "1"
                                     &&
                                     <th scope="col">
                                         <button

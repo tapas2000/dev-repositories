@@ -1,6 +1,10 @@
 import { useQuery, gql } from "@apollo/client";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import { END_POINT_FAVORITES } from "../../../constants/apis";
 import { queryRepositories } from "../../../constants/queries";
+import { fetchWithToken } from "../../../helpers/fetch";
 import { Loader } from "../../ui/Loader";
 import { RepositoriesFilterer } from "./RepositoriesFilterer";
 import { RepositoriesTable } from "./RepositoriesTable";
@@ -8,15 +12,23 @@ import { RepositoriesTable } from "./RepositoriesTable";
 export const RepositoriesScreen = () => {
 
   const [repositories, setRepositories] = useState([]);
-  const [optionSelected, setOptionSelected] = useState();
+  const [optionSelected, setOptionSelected] = useState("1");
+  const { nickname } = useSelector(state => state.auth);
 
   const filterRepositoryByOption = (option) => {
     if (option === "1") {
       setRepositories(Array.from([...data.user.repositories.nodes]));
     }
     if (option === "2") {
-      setRepositories([]);
+      getFavorites();
     }
+  }
+
+  const getFavorites = async () => {
+    const resp = await fetchWithToken(END_POINT_FAVORITES);
+    const body = await resp.json();
+
+    setRepositories(body.favorites);
   }
 
   const filterRepositoryByName = (text) => {
@@ -24,12 +36,19 @@ export const RepositoriesScreen = () => {
     setRepositories(filteredRepositories)
   }
 
-  const addFavorite = (selectedRepository) => {
-    console.log("Seleccionado ", selectedRepository);
+  const addFavorite = async (selectedRepository) => {
+    const resp = await fetchWithToken(END_POINT_FAVORITES, selectedRepository, 'POST');
+    const body = await resp.json();
+
+    if (resp.status === 201) {
+      Swal.fire("Success", "Favorite repository added successfully")
+    } else {
+      Swal.fire("Error", body.msg ? body.msg : "Upps.. something goes wrong");
+    }
   }
 
   const { data, loading } = useQuery(gql`${queryRepositories}`, {
-    variables: { login: 'tapas2000' },
+    variables: { login: nickname },
   });
 
 

@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 
-export const FormLogin = () => {
+export const FormLogin = ({ changeForm }) => {
 
     const dispatch = useDispatch();
     const [formValues, handleChange] = useForm({
@@ -15,43 +15,44 @@ export const FormLogin = () => {
         dispatch(login(formValues))
     }
 
-    const styleForLogin = {
-        backgroundColor: "#3AB4F2",
-    }
-
     return (
-        <div
-            className="card"
-            style={styleForLogin}
-        >
-            <div className='card-body'>
-                <h2>Sig in</h2>
-                <form onSubmit={handleLogin}>
-                    <div className="mb-3">
-                        <label htmlFor={`exampleInputEmail1login`} className="form-label">Email address</label>
-                        <input
-                            type="email"
-                            className="form-control"
-                            id={`"exampleInputEmail1login"`}
-                            name="email"
-                            value={formValues.email}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor={`exampleInputPassword1login`} className="form-label">Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            id={`exampleInputPassword1login`}
-                            name="password"
-                            value={formValues.password}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <button type="submit" className={`btn btn-light`}>Sig in</button>
-                </form>
-            </div>
+        <div>
+            <h2>Log in</h2>
+            <form onSubmit={handleLogin}>
+                <div className="mb-3">
+                    <label htmlFor={`exampleInputEmail1login`} className="form-label">Email address</label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        id={`"exampleInputEmail1login"`}
+                        name="email"
+                        value={formValues.email}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor={`exampleInputPassword1login`} className="form-label">Password</label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        id={`exampleInputPassword1login`}
+                        name="password"
+                        value={formValues.password}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="d-flex mb-3">
+                    <button type="submit" className={`btn btn-outline-primary`}>Sig in</button>
+                    <span
+                        className={`nav-link`}
+                        onClick={changeForm}
+                        style={{
+                            cursor: "pointer"
+                        }}>
+                        Don't have an account ?
+                    </span>
+                </div>
+            </form>
         </div>
     )
 }
