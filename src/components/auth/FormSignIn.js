@@ -14,7 +14,8 @@ export const FormSignIn = ({ changeForm }) => {
 
     const handleSigin = (e) => {
         e.preventDefault();
-        dispatch(register(formValues))
+        dispatch(register(formValues));
+        changeForm();
     }
 
     return (
