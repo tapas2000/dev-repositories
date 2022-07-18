@@ -1,9 +1,10 @@
 import { types } from "../types/types";
 
 const initialState = {
+    name: "",
+    nickname: "",
     isAuthenticated: false,
     email: null,
-    password: null
 };
 export const authReducer = (state = initialState, action) => {
 
